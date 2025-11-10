@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AgriScan</string>
+    <string name="personal_information">Personal information</string>
+    <string name="language">Language</string>
+    <string name="change_password">Change password</string>
+    <string name="logout">Logout</string>
+
+    <!-- Login Screen -->
+    <string name="welcome_to_agri_scan">Welcome to Agri Scan</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="dont_have_an_account">Dont have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or">Or</string>
+    <string name="sign_in_with_social_networks">Sign in with social networks</string>
+    <string name="login_failed">Login failed</string>
+
+    <!-- Sign Up Screen -->
+    <string name="create_account">Create account</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="dd_mm_yy">DD/MM/YY</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="terms_and_policy">By continuing, you agree to Terms of Use and Privacy Policy.</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log In</string>
+
+    <!-- Forgot Password Screen -->
+    <string name="forgot_password_title">Forgot password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset password?</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="enter_email_address">Enter email address</string>
+    <string name="next_step">Next step</string>
+    <string name="sign_up_with_social_networks">Sign up with social networks</string>
+
+    <!-- Home Screen -->
+    <string name="identify_your_sugarcane">|| Identify Your Sugarcane ||</string>
+    <string name="hey_user">Hey %1$s!</string>
+    <string name="lets_identify_your_breed">Lets identify your breed</string>
+    <string name="scan_and_identify_your_breed">|| Scan &amp; Identify Your Breed ||</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="last_predicted_breed">Last predicted breed</string>
+    <string name="support">Support</string>
+    <string name="home">Home</string>
+    <string name="learn">Learn</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="profile">Profile</string>
+    <string name="scan">Scan</string>
+
+    <!-- Greetings -->
+    <string name="good_morning">Good morning!</string>
+    <string name="good_afternoon">Good afternoon!</string>
+    <string name="good_evening">Good evening!</string>
+
+    <!-- Learn Screen -->
+    <string name="learn_about_sugarcane_breeds">Learn about sugarcane breeds</string>
+    <string name="explore_sugarcane_varieties">Explore different sugarcane varieties, their characteristics, and growing tips</string>
+    <string name="type">Type:</string>
+    <string name="region">Region:</string>
+    <string name="maturity">Maturity:</string>
+    <string name="juice_yield">Juice yield:</string>
+    <string name="description">Description:</string>
+    <string name="key_characteristics">Key characteristics:</string>
+    <string name="growing_tips">Growing tips:</string>
+
+    <!-- Tutorial Screen -->
+    <string name="play_the_tutorial_video">Play the tutorial video</string>
+    <string name="play_video">Play video</string>
+    <string name="pause_tutorial">Pause Tutorial</string>
+
+    <!-- Scan Screen -->
+    <string name="camera_permission_required">Camera permission is required to use the scanner. Please grant permission to continue.</string>
+
+    <!-- Result Screen -->
+    <string name="prediction_result">Prediction result</string>
+    <string name="captured_image">Captured image</string>
+    <string name="breed_name">Breed name:</string>
+    <string name="confidence">Confidence:</string>
+    <string name="prediction_date">Prediction date:</string>
+    <string name="scan_again">Scan again</string>
+    <string name="done">Done</string>
+
+    <!-- Profile Screen -->
+    <string name="no_of_scans">No. of scans</string>
+    <string name="no_of_predictions">No. of predictions</string>
+    <string name="unique_breeds">Unique breeds</string>
+    <string name="breed_location">Breed location</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Misc -->
+    <string name="identify_your_sugarcane_banner">|| अपनी गन्ने की पहचान करें ||</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">एग्रीस्कैन</string>
+    <string name="personal_information">व्यक्तिगत जानकारी</string>
+    <string name="language">भाषा</string>
+    <string name="change_password">पासवर्ड बदलें</string>
+    <string name="logout">लॉग आउट</string>
+
+    <!-- Login Screen -->
+    <string name="welcome_to_agri_scan">एग्रीस्कैन में आपका स्वागत है</string>
+    <string name="email">ईमेल</string>
+    <string name="password">पासवर्ड</string>
+    <string name="sign_in">साइन इन करें</string>
+    <string name="dont_have_an_account">खाता नहीं है?</string>
+    <string name="sign_up">साइन अप करें</string>
+    <string name="or">या</string>
+    <string name="sign_in_with_social_networks">सोशल नेटवर्क से साइन इन करें</string>
+    <string name="login_failed">लॉगिन विफल</string>
+
+    <!-- Sign Up Screen -->
+    <string name="create_account">खाता बनाएं</string>
+    <string name="enter_your_full_name">अपना पूरा नाम दर्ज करें</string>
+    <string name="enter_your_email_address">अपना ईमेल पता दर्ज करें</string>
+    <string name="enter_your_phone_number">अपना फ़ोन नंबर दर्ज करें</string>
+    <string name="dd_mm_yy">DD/MM/YY</string>
+    <string name="confirm_password">पासवर्ड की पुष्टि करें</string>
+    <string name="terms_and_policy">जारी रखकर, आप उपयोग की शर्तों और गोपनीयता नीति से सहमत हैं।</string>
+    <string name="already_have_an_account">पहले से ही एक खाता है?</string>
+    <string name="log_in">लॉग इन करें</string>
+
+    <!-- Forgot Password Screen -->
+    <string name="forgot_password_title">पासवर्ड भूल गए</string>
+    <string name="forgot_password">पासवर्ड भूल गए?</string>
+    <string name="reset_password">पासवर्ड रीसेट करें?</string>
+    <string name="lorem_ipsum">लोरेम इप्सम डोलोर सिट अमेट, कॉन्सेक्टेटुर एडिपिसिंग एलीट, सेड डू इयूसमोड टेम्पोर इनसिडिडंट यूट लेबोर एट डोलोरे मैग्ना एलिका।</string>
+    <string name="enter_email_address">ईमेल पता दर्ज करें</string>
+    <string name="next_step">अगला कदम</string>
+    <string name="sign_up_with_social_networks">सोशल नेटवर्क से साइन अप करें</string>
+
+    <!-- Home Screen -->
+    <string name="identify_your_sugarcane">|| अपने गन्ने को पहचानें ||</string>
+    <string name="hey_user">नमस्ते %1$s!</string>
+    <string name="lets_identify_your_breed">आइए आपकी नस्ल की पहचान करें</string>
+    <string name="scan_and_identify_your_breed">|| अपनी नस्ल को स्कैन और पहचानें ||</string>
+    <string name="dashboard">डैशबोर्ड</string>
+    <string name="last_predicted_breed">अंतिम अनुमानित नस्ल</string>
+    <string name="support">सहायता</string>
+    <string name="home">होम</string>
+    <string name="learn">जानें</string>
+    <string name="tutorial">ट्यूटोरियल</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="scan">स्कैन</string>
+
+    <!-- Greetings -->
+    <string name="good_morning">सुप्रभात!</string>
+    <string name="good_afternoon">शुभ दोपहर!</string>
+    <string name="good_evening">शुभ संध्या!</string>
+
+    <!-- Learn Screen -->
+    <string name="learn_about_sugarcane_breeds">गन्ने की नस्लों के बारे में जानें</string>
+    <string name="explore_sugarcane_varieties">विभिन्न गन्ने की किस्मों, उनकी विशेषताओं और उगाने की युक्तियों का अन्वेषण करें</string>
+    <string name="type">प्रकार:</string>
+    <string name="region">क्षेत्र:</string>
+    <string name="maturity">परिपक्वता:</string>
+    <string name="juice_yield">रस की उपज:</string>
+    <string name="description">विवरण:</string>
+    <string name="key_characteristics">मुख्य विशेषताएँ:</string>
+    <string name="growing_tips">उगाने की युक्तियाँ:</string>
+
+    <!-- Tutorial Screen -->
+    <string name="play_the_tutorial_video">ट्यूटोरियल वीडियो चलाएं</string>
+    <string name="play_video">वीडियो चलाएं</string>
+    <string name="pause_tutorial">ट्यूटोरियल रोकें</string>
+
+    <!-- Scan Screen -->
+    <string name="camera_permission_required">स्कैनर का उपयोग करने के लिए कैमरा अनुमति आवश्यक है। जारी रखने के लिए कृपया अनुमति दें।</string>
+
+    <!-- Result Screen -->
+    <string name="prediction_result">अनुमान परिणाम</string>
+    <string name="captured_image">कैप्चर की गई छवि</string>
+    <string name="breed_name">नस्ल का नाम:</string>
+    <string name="confidence">आत्मविश्वास:</string>
+    <string name="prediction_date">अनुमान की तारीख:</string>
+    <string name="scan_again">फिर से स्कैन करें</string>
+    <string name="done">हो गया</string>
+
+    <!-- Profile Screen -->
+    <string name="no_of_scans">स्कैन की संख्या</string>
+    <string name="no_of_predictions">अनुमानों की संख्या</string>
+    <string name="unique_breeds">अद्वितीय नस्लें</string>
+    <string name="breed_location">नस्ल का स्थान</string>
+    <string name="current_password">वर्तमान पासवर्ड</string>
+    <string name="new_password">नया पासवर्ड</string>
+    <string name="cancel">रद्द करें</string>
+
+    <!-- Misc -->
+    <string name="identify_your_sugarcane_banner">|| अपनी गन्ने की पहचान करें ||</string>
+</resources>
