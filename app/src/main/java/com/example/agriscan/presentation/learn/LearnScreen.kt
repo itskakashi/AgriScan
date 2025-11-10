@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -193,13 +194,13 @@ private fun BreedInfoCard(breed: SugarcaneBreed) {
         colors = CardDefaults.cardColors(containerColor = BrandGreenDark),
     ) {
         Column(Modifier.padding(16.dp)) {
-            Text(breed.name, color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(id = breed.name), color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
-            BreedDetailRow(stringResource(id = R.string.type), breed.type)
-            BreedDetailRow(stringResource(id = R.string.region), breed.region)
-            BreedDetailRow(stringResource(id = R.string.maturity), breed.maturity)
-            BreedDetailRow(stringResource(id = R.string.juice_yield), breed.juiceYield)
-            BreedDetailRow(stringResource(id = R.string.description), breed.description)
+            BreedDetailRow(stringResource(id = R.string.type), stringResource(id = breed.type))
+            BreedDetailRow(stringResource(id = R.string.region), stringResource(id = breed.region))
+            BreedDetailRow(stringResource(id = R.string.maturity), stringResource(id = breed.maturity))
+            BreedDetailRow(stringResource(id = R.string.juice_yield), stringResource(id = breed.juiceYield))
+            BreedDetailRow(stringResource(id = R.string.description), stringResource(id = breed.description))
             Spacer(Modifier.height(16.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 breed.images.forEach { imageRes ->
@@ -223,7 +224,7 @@ private fun BreedInfoCard(breed: SugarcaneBreed) {
                         fontSize = 14.sp
                     )
                     Text(
-                        text = breed.keyCharacteristics.joinToString("\n"),
+                        text = stringArrayResource(id = breed.keyCharacteristics).joinToString("\n"),
                         color = Color.White, fontSize = 12.sp, lineHeight = 18.sp
                     )
                 }
@@ -231,7 +232,7 @@ private fun BreedInfoCard(breed: SugarcaneBreed) {
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(id = R.string.growing_tips), color = AccentLime, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     Text(
-                        text = breed.growingTips.joinToString("\n"),
+                        text = stringArrayResource(id = breed.growingTips).joinToString("\n"),
                         color = Color.White, fontSize = 12.sp, lineHeight = 18.sp
                     )
                 }

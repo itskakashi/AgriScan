@@ -38,10 +38,10 @@
     <string name="sign_up_with_social_networks">Sign up with social networks</string>
 
     <!-- Home Screen -->
-    <string name="identify_your_sugarcane">|| Identify Your Sugarcane ||</string>
+    <string name="identify_your_sugarcane">Identify Your Sugarcane</string>
     <string name="hey_user">Hey %1$s!</string>
     <string name="lets_identify_your_breed">Lets identify your breed</string>
-    <string name="scan_and_identify_your_breed">|| Scan &amp; Identify Your Breed ||</string>
+    <string name="scan_and_identify_your_breed">Scan &amp; Identify Your Breed</string>
     <string name="dashboard">Dashboard</string>
     <string name="last_predicted_breed">Last predicted breed</string>
     <string name="support">Support</string>
@@ -66,6 +66,45 @@
     <string name="description">Description:</string>
     <string name="key_characteristics">Key characteristics:</string>
     <string name="growing_tips">Growing tips:</string>
+
+    <!-- Breed 1: Co - 99006 -->
+    <string name="breed_1_name">Co - 99006</string>
+    <string name="breed_1_type">Late Maturing</string>
+    <string name="breed_1_region">Andhra Pradesh, Telangana</string>
+    <string name="breed_1_maturity">13-14 Months</string>
+    <string name="breed_1_juice_yield">Very High</string>
+    <string name="breed_1_description">Late maturing, high-yielding variety with excellent juice quality.</string>
+    <string-array name="breed_1_key_characteristics">
+        <item>Very High sucrose content</item>
+        <item>Excellent ratooning</item>
+        <item>Resistant to major pests</item>
+        <item>Long growing period</item>
+    </string-array>
+    <string-array name="breed_1_growing_tips">
+        <item>Plant in April</item>
+        <item>Intensive irrigation</item>
+        <item>NPK ratio: 170:85:85 kg/ha</item>
+        <item>Harvest at 13-14 months</item>
+    </string-array>
+
+    <!-- Breed 2: Co - 86032 -->
+    <string name="breed_2_name">Co - 86032</string>
+    <string name="breed_2_type">Mid-late Maturing</string>
+    <string name="breed_2_region">Maharashtra, Karnataka</string>
+    <string name="breed_2_maturity">12-13 Months</string>
+    <string name="breed_2_juice_yield">High</string>
+    <string name="breed_2_description">A popular variety known for its adaptability and good commercial cane sugar.</string>
+    <string-array name="breed_2_key_characteristics">
+        <item>Good sucrose content</item>
+        <item>Tolerant to drought</item>
+        <item>Suitable for different soil types</item>
+    </string-array>
+    <string-array name="breed_2_growing_tips">
+        <item>Planting from Oct to Feb</item>
+        <item>Requires well-drained soil</item>
+        <item>Responds well to fertilizers</item>
+    </string-array>
+
 
     <!-- Tutorial Screen -->
     <string name="play_the_tutorial_video">Play the tutorial video</string>

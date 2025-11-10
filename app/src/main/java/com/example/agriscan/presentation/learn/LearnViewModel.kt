@@ -16,45 +16,27 @@ class LearnViewModel(private val languageManager: LanguageManager) : ViewModel()
         LearnState(
             breeds = listOf(
                 SugarcaneBreed(
-                    name = "Co - 99006",
-                    type = "Late Maturing",
-                    region = "Andhra Pradesh, Telangana",
-                    maturity = "13-14 Months",
-                    juiceYield = "Very High",
-                    description = "Late maturing, high-yielding variety with excellent juice quality.",
+                    name = R.string.breed_1_name,
+                    type = R.string.breed_1_type,
+                    region = R.string.breed_1_region,
+                    maturity = R.string.breed_1_maturity,
+                    juiceYield = R.string.breed_1_juice_yield,
+                    description = R.string.breed_1_description,
                     images = listOf(R.drawable.rice_banner, R.drawable.rice_banner),
-                    keyCharacteristics = listOf(
-                        "Very High sucrose content",
-                        "Excellent ratooning",
-                        "Resistant to major pests",
-                        "Long growing period"
-                    ),
-                    growingTips = listOf(
-                        "Plant in April",
-                        "Intensive irrigation",
-                        "NPK ratio: 170:85:85 kg/ha",
-                        "Harvest at 13-14 months"
-                    )
+                    keyCharacteristics = R.array.breed_1_key_characteristics,
+                    growingTips = R.array.breed_1_growing_tips
                 ),
                 // You can add more breeds here
                 SugarcaneBreed(
-                    name = "Co - 86032",
-                    type = "Mid-late Maturing",
-                    region = "Maharashtra, Karnataka",
-                    maturity = "12-13 Months",
-                    juiceYield = "High",
-                    description = "A popular variety known for its adaptability and good commercial cane sugar.",
+                    name = R.string.breed_2_name,
+                    type = R.string.breed_2_type,
+                    region = R.string.breed_2_region,
+                    maturity = R.string.breed_2_maturity,
+                    juiceYield = R.string.breed_2_juice_yield,
+                    description = R.string.breed_2_description,
                     images = listOf(R.drawable.rice_banner, R.drawable.rice_banner),
-                    keyCharacteristics = listOf(
-                        "Good sucrose content",
-                        "Tolerant to drought",
-                        "Suitable for different soil types"
-                    ),
-                    growingTips = listOf(
-                        "Planting from Oct to Feb",
-                        "Requires well-drained soil",
-                        "Responds well to fertilizers"
-                    )
+                    keyCharacteristics = R.array.breed_2_key_characteristics,
+                    growingTips = R.array.breed_2_growing_tips
                 )
             )
         )
