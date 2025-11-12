@@ -4,9 +4,9 @@ import com.example.agriscan.domain.AuthRepository
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.uk.ac.tees.mad.agriscan.domain.util.DataError
-import com.uk.ac.tees.mad.agriscan.domain.util.EmptyResult
-import com.uk.ac.tees.mad.agriscan.domain.util.firebaseResult
+import com.example.agriscan.domain.util.DataError
+import com.example.agriscan.domain.util.EmptyResult
+import com.example.agriscan.domain.util.firebaseResult
 import kotlinx.coroutines.tasks.await
 
 class AuthRepositoryImpl(

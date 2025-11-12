@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.bookly.domain.util
+package com.example.agriscan.domain.util
 
 
 object UrlConstants {

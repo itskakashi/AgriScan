@@ -1,6 +1,6 @@
 package com.example.agriscan.presentation.auth.login
 
-import com.uk.ac.tees.mad.agriscan.domain.util.DataError
+import com.example.agriscan.domain.util.DataError
 
 sealed interface LoginEvent {
     object Success : LoginEvent

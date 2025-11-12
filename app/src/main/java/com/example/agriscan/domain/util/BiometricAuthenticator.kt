@@ -1,4 +1,4 @@
-package com.uk.ac.tees.mad.agriscan.domain.util
+package com.example.agriscan.domain.util
 
 import android.content.Context
 import android.content.ContextWrapper

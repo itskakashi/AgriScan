@@ -1,6 +1,6 @@
 package com.example.agriscan.presentation.auth.forgot_password
 
-import com.uk.ac.tees.mad.agriscan.domain.util.DataError
+import com.example.agriscan.domain.util.DataError
 
 sealed interface ForgotPasswordEvent {
     object Success : ForgotPasswordEvent

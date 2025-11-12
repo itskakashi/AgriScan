@@ -3,7 +3,7 @@ package com.example.agriscan.presentation.auth.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.agriscan.domain.AuthRepository
-import com.uk.ac.tees.mad.agriscan.domain.util.Result
+import com.example.agriscan.domain.util.Result
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

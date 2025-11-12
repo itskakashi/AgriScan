@@ -1,7 +1,7 @@
 package com.example.agriscan.domain
 
-import com.uk.ac.tees.mad.agriscan.domain.util.DataError
-import com.uk.ac.tees.mad.agriscan.domain.util.EmptyResult
+import com.example.agriscan.domain.util.DataError
+import com.example.agriscan.domain.util.EmptyResult
 
 interface AuthRepository {
     suspend fun signIn(email: String, password: String): EmptyResult<DataError.Firebase>

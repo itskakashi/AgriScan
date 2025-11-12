@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.agriscan.R
 import com.example.agriscan.ui.theme.AgriScanTheme
-import com.uk.ac.tees.mad.agriscan.domain.util.ObserveAsEvents
+import com.example.agriscan.domain.util.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

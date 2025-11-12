@@ -1,4 +1,4 @@
-package com.uk.ac.tees.mad.agriscan.domain.util
+package com.example.agriscan.domain.util
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
