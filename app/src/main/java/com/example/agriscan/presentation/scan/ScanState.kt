@@ -7,5 +7,7 @@ data class ScanState(
     val isCameraReady: Boolean = false,
     val isImageCapturing: Boolean = false,
     val capturedImage: Bitmap? = null,
-    val lastPhoto: Uri? = null
+    val lastPhoto: Uri? = null,
+    val classificationResult: String? = null,
+    val isClassifying: Boolean = false
 )

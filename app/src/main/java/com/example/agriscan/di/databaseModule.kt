@@ -10,11 +10,10 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             UserDatabase::class.java,
-            "agriscan-db"
+            "user_database"
         ).fallbackToDestructiveMigration().build()
     }
 
-    single {
-        get<UserDatabase>().userDao()
-    }
+    single { get<UserDatabase>().userDao() }
+    single { get<UserDatabase>().scanDao() }
 }

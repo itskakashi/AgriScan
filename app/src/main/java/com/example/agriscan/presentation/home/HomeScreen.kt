@@ -46,6 +46,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -69,6 +70,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -97,6 +99,9 @@ import java.util.Calendar
 @Composable
 fun HomeRoot(navController: NavController, vm: HomeViewModel = koinViewModel()) {
     val uiState by vm.uiState.collectAsState()
+    LaunchedEffect(Unit) {
+        vm.syncScans()
+    }
     HomeScreen(
         state = uiState,
         onAction = vm::onAction,
@@ -151,15 +156,15 @@ fun HomeScreen(
                 item { ScanAndIdentifyBanner() }
                 item { Spacer(Modifier.height(20.dp)) }
                 item { Dashboard(
-                    numberOfScans = state.numberOfScans,
-                    numberOfPredictions = state.numberOfPredictions,
-                    uniqueBreeds = state.uniqueBreeds,
-                    breedLocation = state.breedLocation
+                    numberOfScans = state.totalScans.toString(),
+                    numberOfPredictions = state.totalScans.toString(),
+                    uniqueBreeds = state.uniqueBreeds.toString(),
+                    lastScanAddress = state.lastScanAddress
                 ) }
                 item { Spacer(Modifier.height(20.dp)) }
                 item {
                     LastPredictionRow(
-                        date = state.lastPredictedDate,
+                        date = state.lastScanDate,
                         breed = state.lastPredictedBreed,
                         onSupportClick = { onAction(HomeAction.SupportButtonTapped) }
                     )
@@ -305,7 +310,7 @@ private fun Dashboard(
     numberOfScans: String,
     numberOfPredictions: String,
     uniqueBreeds: String,
-    breedLocation: String
+    lastScanAddress: String
 ) {
     val items = listOf(
         DashboardItem(
@@ -325,7 +330,7 @@ private fun Dashboard(
         ),
         DashboardItem(
             labelRes = R.string.breed_location,
-            value = breedLocation,
+            value = lastScanAddress,
             icon = R.drawable.ic_location
         )
     )
@@ -379,7 +384,9 @@ private fun DashboardCard(item: DashboardItem) {
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     fontSize = if (item.labelRes == R.string.breed_location) 14.sp else 26.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

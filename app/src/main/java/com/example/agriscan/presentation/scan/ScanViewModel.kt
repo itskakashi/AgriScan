@@ -12,20 +12,44 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.agriscan.data.local.Location
+import com.example.agriscan.data.local.entities.Scan
+import com.example.agriscan.domain.repository.ClassificationRepository
+import com.example.agriscan.domain.repository.GeocodingRepository
+import com.example.agriscan.domain.repository.ScanRepository
+import com.example.agriscan.domain.util.Result
+import com.example.agriscan.presentation.navigation.Screen
+import com.example.agriscan.util.LocationTracker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 
-class ScanViewModel : ViewModel() {
+@Serializable
+data class Prediction(val prediction: String)
+
+class ScanViewModel(
+    private val classificationRepository: ClassificationRepository,
+    private val scanRepository: ScanRepository,
+    private val locationTracker: LocationTracker,
+    private val geocodingRepository: GeocodingRepository
+) : ViewModel() {
 
     private val _state = MutableStateFlow(ScanState())
     val state = _state.asStateFlow()
 
-    private val _navigateToResult = MutableSharedFlow<Unit>()
+    private val _navigateToResult = MutableSharedFlow<Screen.ResultScreen>()
     val navigateToResult = _navigateToResult.asSharedFlow()
+
+    private val _navigateToHome = MutableSharedFlow<Unit>()
+    val navigateToHome = _navigateToHome.asSharedFlow()
 
     fun onAction(action: ScanAction, context: Context, cameraController: LifecycleCameraController) {
         when (action) {
@@ -40,6 +64,7 @@ class ScanViewModel : ViewModel() {
             is ScanAction.OnCancelClick -> {
                 onCancelCapture()
             }
+
             else -> {}
         }
     }
@@ -50,10 +75,7 @@ class ScanViewModel : ViewModel() {
         } else {
             MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
         }
-        BitmapData.bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        viewModelScope.launch {
-            _navigateToResult.emit(Unit)
-        }
+        classifyImage(bitmap.copy(Bitmap.Config.ARGB_8888, true))
     }
 
     private fun capturePhoto(context: Context, cameraController: LifecycleCameraController) {
@@ -77,9 +99,55 @@ class ScanViewModel : ViewModel() {
 
     private fun onConfirmCapture() {
         state.value.capturedImage?.let { 
-            BitmapData.bitmap = it
-            viewModelScope.launch {
-                _navigateToResult.emit(Unit)
+            classifyImage(it)
+        }
+    }
+
+    private fun classifyImage(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _state.update { it.copy(isClassifying = true) }
+
+            val classificationResultDeferred = async { classificationRepository.classifyImage(bitmap) }
+            val currentLocation = locationTracker.getCurrentLocation()
+            val locationForGeocoding = if (currentLocation != null) {
+                Location(latitude = currentLocation.latitude, longitude = currentLocation.longitude)
+            } else {
+                Location(0.0, 0.0)
+            }
+            val addressResultDeferred = async { geocodingRepository.getAddressFromCoordinates(locationForGeocoding) }
+
+            val classificationResult = classificationResultDeferred.await()
+            val addressResult = addressResultDeferred.await()
+
+            when(classificationResult) {
+                is Result.Success -> {
+                    val address = if (addressResult is Result.Success) addressResult.data else ""
+                    val json = Json { ignoreUnknownKeys = true }
+                    val prediction = json.decodeFromString<Prediction>(classificationResult.data)
+                    val breedName = prediction.prediction
+                    val scan = Scan(
+                        breedName = breedName,
+                        latitude = locationForGeocoding.latitude,
+                        longitude = locationForGeocoding.longitude,
+                        timestamp = System.currentTimeMillis(),
+                        address = address
+                    )
+                    scanRepository.insertScan(scan)
+                    _state.update { it.copy(classificationResult = breedName, isClassifying = false) }
+                    BitmapData.bitmap = bitmap
+                    _navigateToResult.emit(
+                        Screen.ResultScreen(
+                            result = breedName, 
+                            address = address,
+                            latitude = locationForGeocoding.latitude,
+                            longitude = locationForGeocoding.longitude
+                        )
+                    )
+                }
+                is Result.Error -> {
+                    _state.update { it.copy(classificationResult = classificationResult.error.toString(), isClassifying = false) } 
+                    _navigateToHome.emit(Unit)
+                }
             }
         }
     }

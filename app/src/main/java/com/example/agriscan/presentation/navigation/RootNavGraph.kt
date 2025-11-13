@@ -17,6 +17,7 @@ import com.example.agriscan.presentation.scan.ScanRoot
 import com.example.agriscan.presentation.tutorial.TutorialRoot
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.compose.koinInject
+import androidx.navigation.toRoute
 
 @Composable
 fun RootNavGraph() {
@@ -86,7 +87,8 @@ fun RootNavGraph() {
             ScanRoot(navController = navController)
         }
         composable<Screen.ResultScreen> {
-            ResultRoot(navController = navController)
+            val args = it.toRoute<Screen.ResultScreen>()
+            ResultRoot(navController = navController, result = args.result, address = args.address, latitude = args.latitude, longitude = args.longitude)
         }
     }
 }

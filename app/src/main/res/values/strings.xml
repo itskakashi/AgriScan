@@ -122,6 +122,7 @@
     <string name="prediction_date">Prediction date:</string>
     <string name="scan_again">Scan again</string>
     <string name="done">Done</string>
+    <string name="address">Address:</string>
 
     <!-- Profile Screen -->
     <string name="no_of_scans">No. of scans</string>

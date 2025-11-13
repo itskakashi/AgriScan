@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -30,25 +32,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.agriscan.R
+import com.example.agriscan.domain.util.ObserveAsEvents
 import com.example.agriscan.presentation.navigation.Screen
 import com.example.agriscan.ui.theme.AgriScanTheme
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ScanRoot(
-    viewModel: ScanViewModel = viewModel(),
+    viewModel: ScanViewModel = koinViewModel(),
     navController: NavController,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        viewModel.navigateToResult.collectLatest {
-            navController.navigate(Screen.ResultScreen)
+        viewModel.navigateToResult.collectLatest { screen ->
+            navController.navigate(screen)
+        }
+    }
+
+    ObserveAsEvents(flow = viewModel.navigateToHome) {
+        snackbarHostState.showSnackbar("Failed to classify image")
+        navController.navigate(Screen.HomeScreen) {
+            popUpTo(Screen.HomeScreen) { inclusive = true }
         }
     }
 
@@ -56,7 +67,8 @@ fun ScanRoot(
         state = state,
         onAction = viewModel::onAction,
         onImageSelected = viewModel::onImageSelected,
-        getLastPhoto = { viewModel.getLastPhoto(context) }
+        getLastPhoto = { viewModel.getLastPhoto(context) },
+        snackbarHostState = snackbarHostState
     )
 }
 
@@ -65,7 +77,8 @@ fun ScanScreen(
     state: ScanState,
     onAction: (ScanAction, Context, LifecycleCameraController) -> Unit,
     onImageSelected: (Uri, Context) -> Unit,
-    getLastPhoto: () -> Unit
+    getLastPhoto: () -> Unit,
+    snackbarHostState: SnackbarHostState
 ) {
     val context = LocalContext.current
     val cameraController = remember { LifecycleCameraController(context) }
@@ -86,10 +99,27 @@ fun ScanScreen(
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
+    var hasLocationPermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        )
+    }
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { granted ->
+            hasLocationPermission = granted
+        }
+    )
     val cameraPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { granted ->
             hasCamPermission = granted
+            if (granted) {
+                locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
         }
     )
 
@@ -137,7 +167,9 @@ fun ScanScreen(
         cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
     }
 
-    Scaffold { padding ->
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -171,6 +203,9 @@ fun ScanScreen(
                     }
                 )
             }
+            if (state.isClassifying) {
+                LoadingScreen()
+            }
         }
     }
 }
@@ -183,7 +218,8 @@ private fun Preview() {
             state = ScanState(),
             onAction = { _, _, _ -> },
             onImageSelected = { _, _ -> },
-            getLastPhoto = {}
+            getLastPhoto = {},
+            snackbarHostState = SnackbarHostState()
         )
     }
 }

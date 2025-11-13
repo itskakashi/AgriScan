@@ -2,8 +2,8 @@ package com.example.agriscan.data
 
 import android.content.Context
 import android.net.Uri
-import com.example.agriscan.data.local.User
-import com.example.agriscan.data.local.UserDao
+import com.example.agriscan.data.local.dao.UserDao
+import com.example.agriscan.data.local.entities.User
 import com.example.agriscan.presentation.profile.PersonalInformationState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,7 +14,7 @@ import java.util.UUID
 
 class UserRepository(
     private val userDao: UserDao,
-    private val firebaseAuth: FirebaseAuth,
+    val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
     private val storage: Storage
 ) {
@@ -32,7 +32,7 @@ class UserRepository(
                 dob = userDoc.getString("dob") ?: "",
                 profilePictureUrl = userDoc.getString("profilePictureUrl") ?: ""
             )
-            userDao.insertOrUpdateUser(user)
+            userDao.insertUser(user)
         }
     }
 

@@ -248,21 +248,21 @@ fun ProfileStats(state: ProfileState) {
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            StatItem(labelRes = R.string.no_of_scans, value = state.scanCount.toString())
+            StatItem(labelRes = R.string.no_of_scans, value = state.totalScans.toString())
             Divider(
                 modifier = Modifier
                     .height(50.dp)
                     .width(1.dp),
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
             )
-            StatItem(labelRes = R.string.no_of_predictions, value = state.predictionCount.toString())
+            StatItem(labelRes = R.string.no_of_predictions, value = state.totalScans.toString())
             Divider(
                 modifier = Modifier
                     .height(50.dp)
                     .width(1.dp),
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
             )
-            StatItem(labelRes = R.string.unique_breeds, value = state.uniqueBreedsCount.toString())
+            StatItem(labelRes = R.string.unique_breeds, value = state.uniqueBreeds.toString())
         }
     }
 }

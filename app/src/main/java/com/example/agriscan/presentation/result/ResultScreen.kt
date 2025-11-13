@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.agriscan.R
@@ -39,11 +38,19 @@ import com.example.agriscan.presentation.BrandGreenDark
 import com.example.agriscan.presentation.navigation.Screen
 import com.example.agriscan.presentation.scan.BitmapData
 import com.example.agriscan.ui.theme.AgriScanTheme
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ResultRoot(
-    viewModel: ResultViewModel = viewModel(),
+    viewModel: ResultViewModel = koinViewModel(
+        parameters = { parametersOf(navController.previousBackStackEntry?.arguments) }
+    ),
     navController: NavController,
+    result: String,
+    address: String,
+    latitude: Double,
+    longitude: Double
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -103,16 +110,23 @@ fun ResultScreen(
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    ResultRow(label = stringResource(id = R.string.breed_name), value = state.breedName)
-                    ResultRow(label = stringResource(id = R.string.confidence), value = "${(state.confidence * 100).toInt()}%" )
-                    ResultRow(label = stringResource(id = R.string.prediction_date), value = state.predictionDate)
+                    state.result?.let {
+                        ResultRow(label = stringResource(id = R.string.breed_name), value = it)
+                    }
+                    if (!state.address.isNullOrBlank()) {
+                        ResultRow(label = stringResource(id = R.string.address), value = state.address)
+                    }
                     Spacer(modifier = Modifier.height(24.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Button(
-                            onClick = { navController.popBackStack() },
+                            onClick = { 
+                                onAction(ResultAction.DisableButtons)
+                                navController.popBackStack() 
+                            },
+                            enabled = state.buttonsEnabled,
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = BrandGreenDark)
                         ) {
@@ -120,10 +134,12 @@ fun ResultScreen(
                         }
                         Button(
                             onClick = {
+                                onAction(ResultAction.DisableButtons)
                                 navController.navigate(Screen.HomeScreen) {
                                     popUpTo(Screen.HomeScreen) { inclusive = true }
                                 }
                             },
+                            enabled = state.buttonsEnabled,
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = BrandGreenDark)
                         ) {

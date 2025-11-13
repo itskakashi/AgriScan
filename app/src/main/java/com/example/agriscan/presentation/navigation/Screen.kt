@@ -34,5 +34,10 @@ sealed interface Screen {
     object ScanScreen : Screen
 
     @Serializable
-    object ResultScreen : Screen
+    data class ResultScreen(
+        val result: String,
+        val address: String,
+        val latitude: Double,
+        val longitude: Double
+    ) : Screen
 }

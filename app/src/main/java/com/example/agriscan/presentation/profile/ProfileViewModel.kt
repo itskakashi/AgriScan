@@ -1,11 +1,11 @@
 package com.example.agriscan.presentation.profile
 
 import android.content.Context
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.agriscan.data.UserRepository
 import com.example.agriscan.domain.AuthRepository
+import com.example.agriscan.domain.repository.ScanRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -15,7 +15,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val userRepository: UserRepository, private val firebaseAuth: FirebaseAuth,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val scanRepository: ScanRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ProfileState())
@@ -27,6 +28,16 @@ class ProfileViewModel(private val userRepository: UserRepository, private val f
 
     init {
         loadUserData()
+        viewModelScope.launch {
+            scanRepository.getTotalScans().collectLatest { totalScans ->
+                _state.update { it.copy(totalScans = totalScans) }
+            }
+        }
+        viewModelScope.launch {
+            scanRepository.getUniqueBreeds().collectLatest { uniqueBreeds ->
+                _state.update { it.copy(uniqueBreeds = uniqueBreeds) }
+            }
+        }
     }
 
     private fun loadUserData() {
@@ -67,6 +78,7 @@ class ProfileViewModel(private val userRepository: UserRepository, private val f
             is ProfileAction.Logout -> {
              viewModelScope.launch {
                  authRepository.logOut()
+                 scanRepository.clearLocalScans()
              }
             }
             is ProfileAction.OnProfileImageChanged -> {

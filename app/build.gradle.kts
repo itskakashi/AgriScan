@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.googleid)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
+    implementation(libs.play.services.location)
 
 
     // ViewModel
@@ -117,6 +118,9 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
     implementation(libs.camera.extensions)
+    //lottie
+    implementation(libs.lottie.compose)
+
 
     //youtube
 //    implementation(libs.youtube.player)
