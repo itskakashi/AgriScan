@@ -68,9 +68,13 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -283,7 +287,7 @@ private fun ScanAndIdentifyBanner() {
     Card(shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) {
         Box {
             Image(
-                painter = painterResource(R.drawable.rice_banner),
+                painter = painterResource(R.drawable.sugarcane_home),
                 contentDescription = "Scan Banner",
                 modifier = Modifier
                     .height(160.dp)
@@ -395,6 +399,8 @@ private fun DashboardCard(item: DashboardItem) {
 
 @Composable
 private fun LastPredictionRow(date: String, breed: String, onSupportClick: () -> Unit) {
+    val formattedText = formatBreedText(breed)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -426,7 +432,7 @@ private fun LastPredictionRow(date: String, breed: String, onSupportClick: () ->
                 Column {
                     Text(stringResource(id = R.string.last_predicted_breed), fontSize = 12.sp, color = Muted)
                     Text(date, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = BrandGreen)
-                    Text(breed, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = OffBlack)
+                    Text(text = formattedText, fontSize = 14.sp, lineHeight = 18.sp, color = OffBlack)
                 }
             }
         }
@@ -439,6 +445,48 @@ private fun LastPredictionRow(date: String, breed: String, onSupportClick: () ->
                 .background(BrandGreen)
         ) {
             Icon(Icons.Default.Headset, stringResource(id = R.string.support), modifier = Modifier.size(40.dp), tint = Color.White)
+        }
+    }
+}
+
+private fun formatBreedText(rawText: String): AnnotatedString {
+    // Example rawText: "✅ Sugarcane Detected (confidence: 93.03%) 🧠 Predicted Breed: Colk-16466 📊 Confidence: 82.09%"
+    // We want to bold the titles like "Sugarcane Detected", "Predicted Breed:", "Confidence:"
+    
+    return buildAnnotatedString {
+        val parts = rawText.split(Regex("(?=✅)|(?=🧠)|(?=📊)"))
+        
+        for (part in parts) {
+            if (part.isBlank()) continue
+            
+            val trimmedPart = part.trim()
+            val colonIndex = trimmedPart.indexOf(':')
+            
+            if (colonIndex != -1 && (trimmedPart.startsWith("🧠") || trimmedPart.startsWith("📊"))) {
+                // For "🧠 Predicted Breed: Value" or "📊 Confidence: Value"
+                // Bold the label part
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(trimmedPart.substring(0, colonIndex + 1))
+                }
+                append(trimmedPart.substring(colonIndex + 1))
+            } else if (trimmedPart.startsWith("✅") || trimmedPart.startsWith("❌")) {
+                 // For the main status line, make it all bold or just the start
+                 // "✅ Sugarcane Detected (confidence: 93.03%)"
+                 val openParenIndex = trimmedPart.indexOf('(')
+                 if (openParenIndex != -1) {
+                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(trimmedPart.substring(0, openParenIndex))
+                     }
+                     append(trimmedPart.substring(openParenIndex))
+                 } else {
+                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(trimmedPart)
+                     }
+                 }
+            } else {
+                append(trimmedPart)
+            }
+            append("\n")
         }
     }
 }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -51,18 +52,24 @@ class HomeViewModel(
             }
         }
         viewModelScope.launch {
-            scanRepository.getAllScans().map { it.lastOrNull() }.collectLatest { lastScan ->
-                val breedName = lastScan?.breedName ?: ""
-                val date = lastScan?.timestamp?.let {
-                    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    sdf.format(Date(it))
-                } ?: ""
-                _uiState.update { it.copy(
-                    lastPredictedBreed = breedName,
-                    lastScanDate = date,
-                    lastScanAddress = lastScan?.address ?: ""
-                ) }
-            }
+            scanRepository.getAllScans()
+                .map { scans ->
+                    // Ensure stable sorting if the database doesn't guarantee order
+                    scans.maxByOrNull { it.timestamp }
+                }
+                .distinctUntilChanged()
+                .collectLatest { lastScan ->
+                    val breedName = lastScan?.breedName ?: ""
+                    val date = lastScan?.timestamp?.let {
+                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        sdf.format(Date(it))
+                    } ?: ""
+                    _uiState.update { it.copy(
+                        lastPredictedBreed = breedName,
+                        lastScanDate = date,
+                        lastScanAddress = lastScan?.address ?: ""
+                    ) }
+                }
         }
     }
 
