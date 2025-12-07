@@ -40,4 +40,7 @@ sealed interface Screen {
         val latitude: Double,
         val longitude: Double
     ) : Screen
+
+    @Serializable
+    object NotificationScreen : Screen
 }

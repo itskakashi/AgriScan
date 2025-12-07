@@ -111,11 +111,14 @@ class ScanViewModel(
             try {
                 val classificationResultDeferred = async { classificationRepository.classifyImage(bitmap) }
                 
+                Log.d("ScanViewModel", "Fetching current location...")
                 val locationForGeocoding = try {
                     val currentLocation = locationTracker.getCurrentLocation()
                     if (currentLocation != null) {
+                        Log.d("ScanViewModel", "Location fetched: Lat ${currentLocation.latitude}, Lon ${currentLocation.longitude}")
                         Location(latitude = currentLocation.latitude, longitude = currentLocation.longitude)
                     } else {
+                        Log.w("ScanViewModel", "Failed to fetch location, using default.")
                         Location(0.0, 0.0)
                     }
                 } catch (e: Exception) {
@@ -123,6 +126,7 @@ class ScanViewModel(
                     Location(0.0, 0.0)
                 }
 
+                Log.d("ScanViewModel", "Geocoding location: ${locationForGeocoding.latitude}, ${locationForGeocoding.longitude}")
                 val addressResultDeferred = async { 
                     try {
                         geocodingRepository.getAddressFromCoordinates(locationForGeocoding) 
@@ -140,10 +144,13 @@ class ScanViewModel(
                 }
                 
                 val addressResult = addressResultDeferred.await()
+                Log.d("ScanViewModel", "Geocoding result: $addressResult")
+
 
                 when(classificationResult) {
                     is Result.Success -> {
                         val address = if (addressResult is Result.Success) addressResult.data else ""
+                        Log.d("ScanViewModel", "Final address: '$address'")
                         Log.d("ScanViewModel", "API Response: ${classificationResult.data}")
                         
                         try {

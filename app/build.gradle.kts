@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
     implementation(libs.play.services.location)
+    implementation(libs.mlkit.translate)
 
 
     // ViewModel

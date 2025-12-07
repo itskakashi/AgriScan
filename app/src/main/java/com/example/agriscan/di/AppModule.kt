@@ -85,8 +85,8 @@ val appModule = module {
 
     single {
         createSupabaseClient(
-            supabaseUrl = "https://kvdagjrceetbstkqanlf.supabase.co",
-            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2ZGFnanJjZWV0YnN0a3FhbmxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTgwODQsImV4cCI6MjA3NjEzNDA4NH0.7S3oqGekCWggEMtaCne9JknjhqlGdpcxFZvUEurmRGI"
+            supabaseUrl = "https://jiulshlytiltosxarloq.supabase.co",
+            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppdWxzaGx5dGlsdG9zeGFybG9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgwMDY1NDIsImV4cCI6MjA3MzU4MjU0Mn0.MmGrXMI-orziV8CnMFT38NmxrAiQRdlMsyhtjfFPcLU"
         ) {
             install(Storage)
         }
@@ -97,11 +97,11 @@ val appModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { ForgotPasswordViewModel(get()) }
-    viewModel { HomeViewModel(get(), get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get(), get()) }
     viewModel { ProfileViewModel(get(), get(), get(), get()) }
     viewModel { PersonalInformationViewModel(get(), get()) }
     viewModel { LearnViewModel(get()) }
     viewModel { TutorialViewModel(get()) }
     viewModel { ScanViewModel(get(), get(), get(), get()) }
-    viewModel { params -> ResultViewModel(savedStateHandle = params.get()) }
+    viewModel { params -> ResultViewModel(savedStateHandle = params.get(), translator = get(), languageManager = get()) }
 }

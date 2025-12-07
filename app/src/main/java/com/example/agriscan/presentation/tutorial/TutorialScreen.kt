@@ -35,7 +35,6 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.agriscan.R
 import com.example.agriscan.presentation.BottomBarHeight
 import com.example.agriscan.presentation.BrandGreenDark
 import com.example.agriscan.presentation.FabDiameter
@@ -43,6 +42,8 @@ import com.example.agriscan.presentation.home.CustomBottomBarFloating
 import com.example.agriscan.presentation.home.TopBar
 import com.example.agriscan.presentation.navigation.Screen
 import org.koin.androidx.compose.koinViewModel
+import com.example.agriscan.R
+
 
 @Composable
 fun TutorialRoot(
@@ -53,7 +54,8 @@ fun TutorialRoot(
     TutorialScreen(
         state = state,
         onAction = viewModel::onAction,
-        navController = navController
+        navController = navController,
+        onNotificationClick = { navController.navigate(Screen.NotificationScreen) }
     )
 }
 
@@ -62,12 +64,13 @@ fun TutorialScreen(
     state: TutorialState,
     onAction: (TutorialAction) -> Unit,
     navController: NavController,
+    onNotificationClick: () -> Unit
 ) {
     // keep track of selected bottom route (your project probably tracks this globally)
     var selectedRoute by remember { mutableStateOf("tutorial") }
 
     Scaffold(
-        topBar = { TopBar { onAction(TutorialAction.LanguageChangeTapped) } },
+        topBar = { TopBar(onLanguageChange = { onAction(TutorialAction.LanguageChangeTapped) }, onNotificationClick = onNotificationClick) },
         containerColor = Color(0xFFF0F2EF)
     ) { padding ->
         Box(Modifier.fillMaxSize()) {

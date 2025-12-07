@@ -107,31 +107,26 @@ fun ScanScreen(
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
-    val locationPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { granted ->
-            hasLocationPermission = granted
-        }
-    )
-    val cameraPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { granted ->
-            hasCamPermission = granted
-            if (granted) {
-                locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
+
+    val permissions = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_FINE_LOCATION
     )
 
-    val storagePermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { granted ->
-            hasStoragePermission = granted
-            if (granted) {
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+        onResult = { permissionsMap ->
+            hasCamPermission = permissionsMap[Manifest.permission.CAMERA] ?: hasCamPermission
+            hasStoragePermission = permissionsMap[Manifest.permission.READ_EXTERNAL_STORAGE] ?: hasStoragePermission
+            hasLocationPermission = permissionsMap[Manifest.permission.ACCESS_FINE_LOCATION] ?: hasLocationPermission
+
+            if (hasStoragePermission) {
                 getLastPhoto()
             }
         }
     )
+
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
@@ -155,16 +150,16 @@ fun ScanScreen(
         }
     }
 
-    LaunchedEffect(hasStoragePermission) {
-        if (hasStoragePermission) {
-            getLastPhoto()
-        } else {
-            storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-    }
-
     LaunchedEffect(key1 = true) {
-        cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        val permissionsToRequest = permissions.filter {
+            ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
+        }.toTypedArray()
+
+        if (permissionsToRequest.isNotEmpty()) {
+            permissionLauncher.launch(permissionsToRequest)
+        } else {
+            getLastPhoto()
+        }
     }
 
     Scaffold(
@@ -176,7 +171,7 @@ fun ScanScreen(
                 .background(Color.Black)
                 .padding(padding)
         ) {
-            if (hasCamPermission) {
+            if (hasCamPermission && hasLocationPermission) {
                 if (state.capturedImage != null) {
                     CaptureConfirmation(
                         bitmap = state.capturedImage,
@@ -194,7 +189,7 @@ fun ScanScreen(
             } else {
                 PermissionDenied(
                     text = stringResource(id = R.string.camera_permission_required),
-                    onRequestPermission = { cameraPermissionLauncher.launch(Manifest.permission.CAMERA) },
+                    onRequestPermission = { permissionLauncher.launch(permissions) },
                     onOpenSettings = {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                             data = Uri.fromParts("package", context.packageName, null)

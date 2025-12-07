@@ -10,6 +10,7 @@ import com.example.agriscan.presentation.auth.login.LoginRoot
 import com.example.agriscan.presentation.auth.splash_screen.SplashScreen
 import com.example.agriscan.presentation.home.HomeRoot
 import com.example.agriscan.presentation.learn.LearnRoot
+import com.example.agriscan.presentation.notification.NotificationScreen
 import com.example.agriscan.presentation.profile.PersonalInformationScreen
 import com.example.agriscan.presentation.profile.ProfileRoot
 import com.example.agriscan.presentation.result.ResultRoot
@@ -89,6 +90,9 @@ fun RootNavGraph() {
         composable<Screen.ResultScreen> {
             val args = it.toRoute<Screen.ResultScreen>()
             ResultRoot(navController = navController, result = args.result, address = args.address, latitude = args.latitude, longitude = args.longitude)
+        }
+        composable<Screen.NotificationScreen> {
+            NotificationScreen(onBackPress = { navController.navigateUp() })
         }
     }
 }

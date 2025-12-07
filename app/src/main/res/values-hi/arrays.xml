@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="breed_1_key_characteristics">
+        <item>बहुत अधिक सुक्रोज सामग्री</item>
+        <item>उत्कृष्ट पेड़ी</item>
+        <item>प्रमुख कीटों के प्रतिरोधी</item>
+        <item>लंबी बढ़ती अवधि</item>
+    </string-array>
+    <string-array name="breed_1_growing_tips">
+        <item>अप्रैल में लगाएं</item>
+        <item>गहन सिंचाई</item>
+        <item>एनपीके अनुपात: 170:85:85 किग्रा/हेक्टेयर</item>
+        <item>13-14 महीने में कटाई करें</item>
+    </string-array>
+    <string-array name="breed_2_key_characteristics">
+        <item>अच्छी सुक्रोज सामग्री</item>
+        <item>सूखे के प्रति सहिष्णु</item>
+        <item>विभिन्न प्रकार की मिट्टी के लिए उपयुक्त</item>
+    </string-array>
+    <string-array name="breed_2_growing_tips">
+        <item>अक्टूबर से फरवरी तक रोपण</item>
+        <item>अच्छी जल निकासी वाली मिट्टी की आवश्यकता है</item>
+        <item>उर्वरकों के प्रति अच्छी प्रतिक्रिया देता है</item>
+    </string-array>
+    <string-array name="breed_3_key_characteristics">
+        <item>चरम परिपक्वता के दौरान उच्च सुक्रोज संचय</item>
+        <item>कई चक्रों के लिए मजबूत पेड़ी प्रदर्शन</item>
+        <item>छेदक और लाल सड़न के लिए अच्छा प्रतिरोध</item>
+        <item>सिंचित और वर्षा आधारित दोनों स्थितियों में अच्छा प्रदर्शन करता है</item>
+    </string-array>
+    <string-array name="breed_3_growing_tips">
+        <item>सर्वोत्तम कल्ले निकलने के लिए फरवरी-मार्च में लगाएं</item>
+        <item>90-110 दिनों में उचित मिट्टी चढ़ाना बनाए रखें</item>
+        <item>एनपीके लागू करें: 150:60:60 किग्रा/हेक्टेयर</item>
+        <item>महत्वपूर्ण चरणों में सिंचाई करें: कल्ले निकलना, बढ़ाव और भव्य विकास</item>
+    </string-array>
+    <string-array name="breed_4_key_characteristics">
+        <item>बहुत अधिक चीनी की रिकवरी (जल्दी पेराई के लिए उपयुक्त)</item>
+        <item>पानी के तनाव के लिए अच्छी सहनशीलता</item>
+        <item>कंडुआ और लाल सड़न के लिए अत्यधिक प्रतिरोधी</item>
+        <item>उच्च तापमान वाले क्षेत्रों में अच्छा प्रदर्शन</item>
+    </string-array>
+    <string-array name="breed_4_growing_tips">
+        <item>अधिकतम सुक्रोज उपज के लिए फरवरी में रोपण को प्राथमिकता दें</item>
+        <item>शुरुआती महीनों में हल्की सिंचाई; जलभराव से बचें</item>
+        <item>एनपीके का प्रयोग करें: 160:60:60 किग्रा/हेक्टेयर</item>
+        <item>चरम चीनी रिकवरी के लिए 10-11 महीने में कटाई करें</item>
+    </string-array>
+    <string-array name="breed_5_key_characteristics">
+        <item>उप-उष्णकटिबंधीय कृषि-जलवायु के लिए अच्छी अनुकूलनशीलता</item>
+        <item>सामान्य कीटों के लिए मध्यम प्रतिरोध</item>
+        <item>औसत सुक्रोज के साथ मजबूत गन्ने का निर्माण</item>
+        <item>मध्यम-उपजाऊ मिट्टी में अच्छा प्रदर्शन करता है</item>
+    </string-array>
+    <string-array name="breed_5_growing_tips">
+        <item>रोपण से पहले उचित बीज उपचार बनाए रखें</item>
+        <item>एनपीके लागू करें: 140:60:60 किग्रा/हेक्टेयर</item>
+        <item>बढ़ाव के दौरान समय पर सिंचाई बनाए रखें</item>
+        <item>सुक्रोज में गिरावट को रोकने के लिए देर से कटाई से बचें</item>
+    </string-array>
+    <string-array name="breed_6_key_characteristics">
+        <item>अच्छी गन्ने की मोटाई और स्थिर विकास</item>
+        <item>सामान्य मिट्टी जनित रोगों के प्रति सहिष्णु</item>
+        <item>औसत पेड़ी की क्षमता</item>
+        <item>मैनुअल और मैकेनिकल दोनों तरह की कटाई के लिए उपयुक्त</item>
+    </string-array>
+    <string-array name="breed_6_growing_tips">
+        <item>इष्टतम विकास के लिए पंक्ति की दूरी 90-120 सेमी बनाए रखें</item>
+        <item>गर्मियों के दौरान हर 20-25 दिनों में सिंचाई प्रदान करें</item>
+        <item>एनपीके का प्रयोग करें: 150:70:70 किग्रा/हेक्टेयर</item>
+        <item>उपजाऊ दोमट मिट्टी के लिए अनुशंसित</item>
+    </string-array>
+    <string-array name="breed_7_key_characteristics">
+        <item>अत्यधिक नमी और अस्थायी बाढ़ के प्रति उच्च सहनशीलता</item>
+        <item>अच्छी गन्ने की मोटाई और ऊंचाई</item>
+        <item>शुरुआती शूट बोरर के प्रतिरोधी</item>
+        <item>निचले इलाकों में अच्छा प्रदर्शन करता है</item>
+    </string-array>
+    <string-array name="breed_7_growing_tips">
+        <item>खराब जल निकासी वाले खेतों के लिए बिल्कुल सही — ऊंचे क्षेत्रों से बचें</item>
+        <item>एनपीके का प्रयोग करें: 160:80:60 किग्रा/हेक्टेयर</item>
+        <item>गैर-बाढ़ वाली अवधि में लगातार सिंचाई प्रदान करें</item>
+        <item>सर्वोत्तम रस की गुणवत्ता के लिए 12-13 महीने में कटाई करें</item>
+    </string-array>
+    <string-array name="breed_8_key_characteristics">
+        <item>उच्च सुक्रोज सामग्री के साथ जल्दी पकने वाला</item>
+        <item>उत्कृष्ट सूखा सहनशीलता</item>
+        <item>उच्च डंठल गणना के साथ मजबूत पेड़ी</item>
+        <item>लाल सड़न और कंडुआ के लिए अच्छा प्रतिरोध</item>
+    </string-array>
+    <string-array name="breed_8_growing_tips">
+        <item>सर्वश्रेष्ठ रोपण खिड़की: जनवरी-फरवरी</item>
+        <item>न्यूनतम पानी की आवश्यकता - केवल आवश्यक होने पर सिंचाई करें</item>
+        <item>एनपीके लागू करें: 150:60:60 किग्रा/हेक्टेयर</item>
+        <item>सुक्रोज के नुकसान से बचने के लिए जल्दी कटाई करें</item>
+    </string-array>
+    <string-array name="breed_9_key_characteristics">
+        <item>उच्च उपज</item>
+        <item>उच्च चीनी सामग्री</item>
+        <item>अच्छी पेड़ी की क्षमता</item>
+    </string-array>
+    <string-array name="breed_9_growing_tips">
+        <item>अच्छी जल निकासी वाली मिट्टी की आवश्यकता है</item>
+        <item>समय पर सिंचाई महत्वपूर्ण है</item>
+        <item>एक संतुलित एनपीके उर्वरक के साथ खाद डालें</item>
+    </string-array>
+</resources>

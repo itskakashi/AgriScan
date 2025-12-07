@@ -1,6 +1,5 @@
 package com.example.agriscan.presentation.profile
 
-
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -10,7 +9,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +31,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,6 +72,10 @@ fun ProfileRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
+
+    LaunchedEffect(true) {
+        viewModel.refresh()
+    }
 
     ProfileScreen(
         state = state,
@@ -270,7 +274,12 @@ fun ProfileStats(state: ProfileState) {
 @Composable
 fun StatItem(@StringRes labelRes: Int, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = stringResource(id = labelRes), fontSize = 14.sp, color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f))
+        Text(
+            text = stringResource(id = labelRes),
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
+            textAlign = TextAlign.Center
+        )
         Text(
             text = value,
             fontSize = 24.sp,
@@ -289,7 +298,7 @@ fun Settings(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         SettingsItem(
-            icon = R.drawable.ic_profile,
+            icon = R.drawable.person,
             text = stringResource(id = R.string.personal_information),
             onClick = { navController.navigate(Screen.PersonalInformationScreen) },
             isProfile = true
@@ -321,23 +330,24 @@ fun Settings(
 
 @Composable
 fun SettingsItem(@DrawableRes icon: Int, text: String, onClick: () -> Unit, isProfile: Boolean = false) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
-        contentPadding = PaddingValues(16.dp)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(Color.White)
+            .clickable { onClick() }
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = null,
-                modifier = Modifier.size(if (isProfile) 38.dp else 24.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text = text, color = MaterialTheme.colorScheme.primary, fontSize = 16.sp)
-        }
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(text = text, color = MaterialTheme.colorScheme.primary, fontSize = 16.sp)
     }
 }
 

@@ -6,13 +6,19 @@ import androidx.lifecycle.viewModelScope
 import com.example.agriscan.data.UserRepository
 import com.example.agriscan.domain.AuthRepository
 import com.example.agriscan.domain.repository.ScanRepository
+import com.example.agriscan.presentation.home.PredictionDetails
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ProfileViewModel(private val userRepository: UserRepository, private val firebaseAuth: FirebaseAuth,
     private val authRepository: AuthRepository,
@@ -27,6 +33,10 @@ class ProfileViewModel(private val userRepository: UserRepository, private val f
     )
 
     init {
+        refresh()
+    }
+
+    fun refresh() {
         loadUserData()
         viewModelScope.launch {
             scanRepository.getTotalScans().collectLatest { totalScans ->
@@ -38,6 +48,57 @@ class ProfileViewModel(private val userRepository: UserRepository, private val f
                 _state.update { it.copy(uniqueBreeds = uniqueBreeds) }
             }
         }
+        viewModelScope.launch {
+            scanRepository.getAllScans()
+                .map { scans ->
+                    scans.maxByOrNull { it.timestamp }
+                }
+                .distinctUntilChanged()
+                .collectLatest { lastScan ->
+                    val breedName = lastScan?.breedName ?: ""
+                    val date = lastScan?.timestamp?.let {
+                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        sdf.format(Date(it))
+                    } ?: ""
+
+                    val details = parsePredictionText(breedName)
+
+                    _state.update { it.copy(
+                        lastPredictedBreed = details,
+                        lastScanDate = date,
+                    ) }
+                }
+        }
+    }
+
+    private fun parsePredictionText(rawText: String): PredictionDetails {
+        if (rawText.isBlank()) {
+            return PredictionDetails()
+        }
+
+        val containsDetails = rawText.contains("✅") || rawText.contains("🧠") || rawText.contains("📊")
+
+        if (!containsDetails) {
+            return PredictionDetails(breed = rawText.trim())
+        }
+
+        val parts = rawText.split(Regex("(?=✅)|(?=🧠)|(?=📊)"))
+
+        var detected = ""
+        var breed = ""
+        var confidence = ""
+
+        for (part in parts) {
+            if (part.isBlank()) continue
+
+            val trimmedPart = part.trim()
+            when {
+                trimmedPart.startsWith("✅") -> detected = trimmedPart.substring(1).trim()
+                trimmedPart.startsWith("🧠") -> breed = trimmedPart.substring(1).trim()
+                trimmedPart.startsWith("📊") -> confidence = trimmedPart.substring(1).trim()
+            }
+        }
+        return PredictionDetails(detected, breed, confidence)
     }
 
     private fun loadUserData() {

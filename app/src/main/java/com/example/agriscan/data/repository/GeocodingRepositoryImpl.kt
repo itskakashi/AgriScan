@@ -27,7 +27,7 @@ class GeocodingRepositoryImpl(
             val address = response.address
             if (address != null) {
                 val addressParts = listOfNotNull(
-                    address.city,
+                    address.village ?: address.town ?: address.city,
                     address.state,
                 )
                 Result.Success(addressParts.joinToString(", "))

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="breed_1_key_characteristics">
+        <item>Very High sucrose content</item>
+        <item>Excellent ratooning</item>
+        <item>Resistant to major pests</item>
+        <item>Long growing period</item>
+    </string-array>
+    <string-array name="breed_1_growing_tips">
+        <item>Plant in April</item>
+        <item>Intensive irrigation</item>
+        <item>NPK ratio: 170:85:85 kg/ha</item>
+        <item>Harvest at 13-14 months</item>
+    </string-array>
+    <string-array name="breed_2_key_characteristics">
+        <item>Good sucrose content</item>
+        <item>Tolerant to drought</item>
+        <item>Suitable for different soil types</item>
+    </string-array>
+    <string-array name="breed_2_growing_tips">
+        <item>Planting from Oct to Feb</item>
+        <item>Requires well-drained soil</item>
+        <item>Responds well to fertilizers</item>
+    </string-array>
+    <string-array name="breed_3_key_characteristics">
+        <item>High sucrose accumulation during peak maturity</item>
+        <item>Strong ratoon performance for multiple cycles</item>
+        <item>Good resistance to borers and red rot</item>
+        <item>Performs well under both irrigated and rainfed conditions</item>
+    </string-array>
+    <string-array name="breed_3_growing_tips">
+        <item>Plant in February–March for best tillering</item>
+        <item>Maintain proper earthing-up at 90–110 days</item>
+        <item>Apply NPK: 150:60:60 kg/ha</item>
+        <item>Irrigate at critical stages: tillering, elongation &amp; grand growth</item>
+    </string-array>
+    <string-array name="breed_4_key_characteristics">
+        <item>Very high sugar recovery (suitable for early crushing)</item>
+        <item>Good tolerance to water stress</item>
+        <item>Highly resistant to smut &amp; red rot</item>
+        <item>Good performance under high-temperature zones</item>
+    </string-array>
+    <string-array name="breed_4_growing_tips">
+        <item>Prefer February planting for maximum sucrose yield</item>
+        <item>Light irrigation during early months; avoid waterlogging</item>
+        <item>Use NPK: 160:60:60 kg/ha</item>
+        <item>Harvest at 10–11 months for peak sugar recovery</item>
+    </string-array>
+    <string-array name="breed_5_key_characteristics">
+        <item>Good adaptability to sub-tropical agro-climate</item>
+        <item>Moderate resistance to common pests</item>
+        <item>Strong cane formation with average sucrose</item>
+        <item>Performs well in medium-fertile soils</item>
+    </string-array>
+    <string-array name="breed_5_growing_tips">
+        <item>Maintain proper seed treatment before planting</item>
+        <item>Apply NPK: 140:60:60 kg/ha</item>
+        <item>Maintain timely irrigation during elongation</item>
+        <item>Avoid late harvesting to prevent sucrose decline</item>
+    </string-array>
+    <string-array name="breed_6_key_characteristics">
+        <item>Good cane girth and stable growth</item>
+        <item>Tolerant to common soil-borne diseases</item>
+        <item>Average ratooning ability</item>
+        <item>Suitable for both manual and mechanical harvesting</item>
+    </string-array>
+    <string-array name="breed_6_growing_tips">
+        <item>Maintain row spacing 90–120 cm for optimum growth</item>
+        <item>Provide irrigation every 20–25 days during summer</item>
+        <item>Use NPK: 150:70:70 kg/ha</item>
+        <item>Recommended for fertile loamy soils</item>
+    </string-array>
+    <string-array name="breed_7_key_characteristics">
+        <item>High tolerance to excess moisture &amp; temporary flooding</item>
+        <item>Good cane girth and height</item>
+        <item>Resistant to early shoot borer</item>
+        <item>Performs well in low-lying fields</item>
+    </string-array>
+    <string-array name="breed_7_growing_tips">
+        <item>Perfect for fields with poor drainage—avoid upland areas</item>
+        <item>Use NPK: 160:80:60 kg/ha</item>
+        <item>Provide frequent irrigation in non-flooded periods</item>
+        <item>Harvest at 12–13 months for best juice quality</item>
+    </string-array>
+    <string-array name="breed_8_key_characteristics">
+        <item>Early maturing with high sucrose content</item>
+        <item>Excellent drought tolerance</item>
+        <item>Strong ratooning with high stalk count</item>
+        <item>Good resistance to red rot &amp; smut</item>
+    </string-array>
+    <string-array name="breed_8_growing_tips">
+        <item>Best planting window: January–February</item>
+        <item>Minimal water requirement — irrigate only when necessary</item>
+        <item>Apply NPK: 150:60:60 kg/ha</item>
+        <item>Harvest early to avoid sucrose loss</item>
+    </string-array>
+</resources>

@@ -10,6 +10,8 @@ data class NominatimReverseResponse(
     data class Address(
         val road: String? = null,
         val suburb: String? = null,
+        val village: String? = null,
+        val town: String? = null,
         val city: String? = null,
         val county: String? = null,
         val state: String? = null,

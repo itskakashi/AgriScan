@@ -50,6 +50,8 @@
     <string name="tutorial">Tutorial</string>
     <string name="profile">Profile</string>
     <string name="scan">Scan</string>
+    <string name="sugarcane_detected">Sugarcane Detected</string>
+    <string name="detected">Detected</string>
 
     <!-- Greetings -->
     <string name="good_morning">Good morning!</string>
@@ -67,44 +69,77 @@
     <string name="key_characteristics">Key characteristics:</string>
     <string name="growing_tips">Growing tips:</string>
 
-    <!-- Breed 1: Co - 99006 -->
-    <string name="breed_1_name">Co - 99006</string>
+    <!-- Breed 1: CoLk-99006 -->
+    <string name="breed_1_name">CoLk-99006</string>
     <string name="breed_1_type">Late Maturing</string>
     <string name="breed_1_region">Andhra Pradesh, Telangana</string>
     <string name="breed_1_maturity">13-14 Months</string>
     <string name="breed_1_juice_yield">Very High</string>
     <string name="breed_1_description">Late maturing, high-yielding variety with excellent juice quality.</string>
-    <string-array name="breed_1_key_characteristics">
-        <item>Very High sucrose content</item>
-        <item>Excellent ratooning</item>
-        <item>Resistant to major pests</item>
-        <item>Long growing period</item>
-    </string-array>
-    <string-array name="breed_1_growing_tips">
-        <item>Plant in April</item>
-        <item>Intensive irrigation</item>
-        <item>NPK ratio: 170:85:85 kg/ha</item>
-        <item>Harvest at 13-14 months</item>
-    </string-array>
 
-    <!-- Breed 2: Co - 86032 -->
-    <string name="breed_2_name">Co - 86032</string>
+    <!-- Breed 2: CoLk-86032 -->
+    <string name="breed_2_name">CoLk-86032</string>
     <string name="breed_2_type">Mid-late Maturing</string>
     <string name="breed_2_region">Maharashtra, Karnataka</string>
     <string name="breed_2_maturity">12-13 Months</string>
     <string name="breed_2_juice_yield">High</string>
     <string name="breed_2_description">A popular variety known for its adaptability and good commercial cane sugar.</string>
-    <string-array name="breed_2_key_characteristics">
-        <item>Good sucrose content</item>
-        <item>Tolerant to drought</item>
-        <item>Suitable for different soil types</item>
-    </string-array>
-    <string-array name="breed_2_growing_tips">
-        <item>Planting from Oct to Feb</item>
-        <item>Requires well-drained soil</item>
-        <item>Responds well to fertilizers</item>
-    </string-array>
 
+    <!-- Breed 3: CoLk-12209 -->
+    <string name="breed_3_name">CoLk-12209</string>
+    <string name="breed_3_type">Mid-late maturing</string>
+    <string name="breed_3_region">North-Central &amp; North-East India</string>
+    <string name="breed_3_maturity">12–14 months</string>
+    <string name="breed_3_juice_yield">High</string>
+    <string name="breed_3_description">High-yielding variety with good ratooning and resistance to major pests.</string>
+
+    <!-- Breed 4: CoLk-14201 -->
+    <string name="breed_4_name">CoLk-14201</string>
+    <string name="breed_4_type">Early to Mid-early maturing</string>
+    <string name="breed_4_region">Punjab, Haryana, Rajasthan, Western UP</string>
+    <string name="breed_4_maturity">10–12 months</string>
+    <string name="breed_4_juice_yield">Very High</string>
+    <string name="breed_4_description">Early-harvest variety with high sugar content and strong pest resistance.</string>
+
+    <!-- Breed 5: CoLk-15466 -->
+    <string name="breed_5_name">CoLk-15466</string>
+    <string name="breed_5_type">Mid-maturing</string>
+    <string name="breed_5_region">Sub-tropical belt</string>
+    <string name="breed_5_maturity">12–13 months</string>
+    <string name="breed_5_juice_yield">Moderate</string>
+    <string name="breed_5_description">Stable-performing variety; limited public research available.</string>
+
+    <!-- Breed 6: CoLk-16466 -->
+    <string name="breed_6_name">CoLk-16466</string>
+    <string name="breed_6_type">Mid-late maturing</string>
+    <string name="breed_6_region">Northern India</string>
+    <string name="breed_6_maturity">12–14 months</string>
+    <string name="breed_6_juice_yield">Moderate</string>
+    <string name="breed_6_description">Regional testing variety; detailed characteristics not publicly available.</string>
+
+    <!-- Breed 7: CoLk-16470 -->
+    <string name="breed_7_name">CoLk-16470</string>
+    <string name="breed_7_type">Mid-late maturing</string>
+    <string name="breed_7_region">Eastern UP, Bihar, Jharkhand, Assam</string>
+    <string name="breed_7_maturity">12–14 months</string>
+    <string name="breed_7_juice_yield">Good</string>
+    <string name="breed_7_description">Suitable for water-logged areas with good cane yield and stress tolerance.</string>
+
+    <!-- Breed 8: CoLk-94184 -->
+    <string name="breed_8_name">CoLk-94184</string>
+    <string name="breed_8_type">Early maturing</string>
+    <string name="breed_8_region">Uttar Pradesh &amp; North India</string>
+    <string name="breed_8_maturity">10–11 months</string>
+    <string name="breed_8_juice_yield">High</string>
+    <string name="breed_8_description">Early-harvest, drought-tolerant variety with excellent ratooning ability.</string>
+
+    <!-- Breed 9: CoLk-97005 -->
+    <string name="breed_9_name">CoLk-97005</string>
+    <string name="breed_9_type">Early maturing</string>
+    <string name="breed_9_region">North India</string>
+    <string name="breed_9_maturity">10-12 months</string>
+    <string name="breed_9_juice_yield">High</string>
+    <string name="breed_9_description">A high-yielding and high-sugar variety with good ratooning ability.</string>
 
     <!-- Tutorial Screen -->
     <string name="play_the_tutorial_video">Play the tutorial video</string>
@@ -132,6 +167,10 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="cancel">Cancel</string>
+
+    <!-- Notification Screen -->
+    <string name="text_notifications">Notifications</string>
+    <string name="text_no_notification">No new notifications</string>
 
     <!-- Misc -->
     <string name="identify_your_sugarcane_banner">|| अपनी गन्ने की पहचान करें ||</string>

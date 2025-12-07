@@ -50,6 +50,10 @@
     <string name="tutorial">ट्यूटोरियल</string>
     <string name="profile">प्रोफ़ाइल</string>
     <string name="scan">स्कैन</string>
+    <string name="sugarcane_detected">गन्ना पाया गया</string>
+    <string name="predicted_breed">अनुमानित नस्ल</string>
+    <string name="confidence">आत्मविश्वास</string>
+    <string name="detected">पता चला</string>
 
     <!-- Greetings -->
     <string name="good_morning">सुप्रभात!</string>
@@ -67,43 +71,77 @@
     <string name="key_characteristics">मुख्य विशेषताएँ:</string>
     <string name="growing_tips">उगाने की युक्तियाँ:</string>
 
-    <!-- Breed 1: Co - 99006 -->
-    <string name="breed_1_name">को - 99006</string>
+    <!-- Breed 1: CoLk-99006 -->
+    <string name="breed_1_name">कोलक-99006</string>
     <string name="breed_1_type">देर से पकने वाली</string>
     <string name="breed_1_region">आंध्र प्रदेश, तेलंगाना</string>
     <string name="breed_1_maturity">13-14 महीने</string>
     <string name="breed_1_juice_yield">बहुत ज़्यादा</string>
     <string name="breed_1_description">देर से पकने वाली, उच्च उपज वाली किस्म जिसमें उत्कृष्ट रस की गुणवत्ता होती है।</string>
-    <string-array name="breed_1_key_characteristics">
-        <item>बहुत अधिक सुक्रोज सामग्री</item>
-        <item>उत्कृष्ट पेड़ी</item>
-        <item>प्रमुख कीटों के प्रतिरोधी</item>
-        <item>लंबी बढ़ती अवधि</item>
-    </string-array>
-    <string-array name="breed_1_growing_tips">
-        <item>अप्रैल में लगाएं</item>
-        <item>गहन सिंचाई</item>
-        <item>एनपीके अनुपात: 170:85:85 किग्रा/हेक्टेयर</item>
-        <item>13-14 महीने में कटाई करें</item>
-    </string-array>
 
-    <!-- Breed 2: Co - 86032 -->
-    <string name="breed_2_name">को - 86032</string>
+    <!-- Breed 2: CoLk-86032 -->
+    <string name="breed_2_name">कोलक-86032</string>
     <string name="breed_2_type">मध्य-देर से पकने वाली</string>
     <string name="breed_2_region">महाराष्ट्र, कर्नाटक</string>
     <string name="breed_2_maturity">12-13 महीने</string>
     <string name="breed_2_juice_yield">उच्च</string>
     <string name="breed_2_description">एक लोकप्रिय किस्म जो अपनी अनुकूलन क्षमता और अच्छी वाणिज्यिक बेंत चीनी के लिए जानी जाती है।</string>
-    <string-array name="breed_2_key_characteristics">
-        <item>अच्छी सुक्रोज सामग्री</item>
-        <item>सूखे के प्रति सहिष्णु</item>
-        <item>विभिन्न प्रकार की मिट्टी के लिए उपयुक्त</item>
-    </string-array>
-    <string-array name="breed_2_growing_tips">
-        <item>अक्टूबर से फरवरी तक रोपण</item>
-        <item>अच्छी जल निकासी वाली मिट्टी की आवश्यकता है</item>
-        <item>उर्वरकों के प्रति अच्छी प्रतिक्रिया देता है</item>
-    </string-array>
+
+    <!-- Breed 3: CoLk-12209 -->
+    <string name="breed_3_name">कोलक-12209</string>
+    <string name="breed_3_type">मध्य-देर से पकने वाला</string>
+    <string name="breed_3_region">उत्तर-मध्य और उत्तर-पूर्वी भारत</string>
+    <string name="breed_3_maturity">12-14 महीने</string>
+    <string name="breed_3_juice_yield">उच्च</string>
+    <string name="breed_3_description">अच्छी पेड़ी और प्रमुख कीटों के प्रति प्रतिरोधी क्षमता वाली उच्च उपज वाली किस्म।</string>
+
+    <!-- Breed 4: CoLk-14201 -->
+    <string name="breed_4_name">कोलक-14201</string>
+    <string name="breed_4_type">जल्दी से मध्य-जल्दी पकने वाला</string>
+    <string name="breed_4_region">पंजाब, हरियाणा, राजस्थान, पश्चिमी यूपी</string>
+    <string name="breed_4_maturity">10-12 महीने</string>
+    <string name="breed_4_juice_yield">बहुत उच्च</string>
+    <string name="breed_4_description">उच्च चीनी सामग्री और मजबूत कीट प्रतिरोध के साथ जल्दी कटाई वाली किस्म।</string>
+
+    <!-- Breed 5: CoLk-15466 -->
+    <string name="breed_5_name">कोलक-15466</string>
+    <string name="breed_5_type">मध्य-पकने वाला</string>
+    <string name="breed_5_region">उप-उष्णकटिबंधीय बेल्ट</string>
+    <string name="breed_5_maturity">12-13 महीने</string>
+    <string name="breed_5_juice_yield">मध्यम</string>
+    <string name="breed_5_description">स्थिर-प्रदर्शन वाली किस्म; सीमित सार्वजनिक शोध उपलब्ध है।</string>
+
+    <!-- Breed 6: CoLk-16466 -->
+    <string name="breed_6_name">कोलक-16466</string>
+    <string name="breed_6_type">मध्य-देर से पकने वाला</string>
+    <string name="breed_6_region">उत्तरी भारत</string>
+    <string name="breed_6_maturity">12-14 महीने</string>
+    <string name="breed_6_juice_yield">मध्यम</string>
+    <string name="breed_6_description">क्षेत्रीय परीक्षण किस्म; विस्तृत विशेषताएँ सार्वजनिक रूप से उपलब्ध नहीं हैं।</string>
+
+    <!-- Breed 7: CoLk-16470 -->
+    <string name="breed_7_name">कोलक-16470</string>
+    <string name="breed_7_type">मध्य-देर से पकने वाला</string>
+    <string name="breed_7_region">पूर्वी यूपी, बिहार, झारखंड, असम</string>
+    <string name="breed_7_maturity">12-14 महीने</string>
+    <string name="breed_7_juice_yield">अच्छा</string>
+    <string name="breed_7_description">अच्छी गन्ना उपज और तनाव सहनशीलता के साथ जल-जमाव वाले क्षेत्रों के लिए उपयुक्त।</string>
+
+    <!-- Breed 8: CoLk-94184 -->
+    <string name="breed_8_name">कोलक-94184</string>
+    <string name="breed_8_type">जल्दी पकने वाला</string>
+    <string name="breed_8_region">उत्तर प्रदेश और उत्तरी भारत</string>
+    <string name="breed_8_maturity">10-11 महीने</string>
+    <string name="breed_8_juice_yield">उच्च</string>
+    <string name="breed_8_description">जल्दी कटाई, सूखा-सहिष्णु किस्म जिसमें उत्कृष्ट पेड़ी की क्षमता है।</string>
+
+    <!-- Breed 9: CoLk-97005 -->
+    <string name="breed_9_name">कोलक-97005</string>
+    <string name="breed_9_type">जल्दी पकने वाला</string>
+    <string name="breed_9_region">उत्तर भारत</string>
+    <string name="breed_9_maturity">10-12 महीने</string>
+    <string name="breed_9_juice_yield">उच्च</string>
+    <string name="breed_9_description">एक उच्च उपज और उच्च चीनी वाली किस्म जिसमें अच्छी पेड़ी की क्षमता है।</string>
 
     <!-- Tutorial Screen -->
     <string name="play_the_tutorial_video">ट्यूटोरियल वीडियो चलाएं</string>
@@ -117,10 +155,10 @@
     <string name="prediction_result">अनुमान परिणाम</string>
     <string name="captured_image">कैप्चर की गई छवि</string>
     <string name="breed_name">नस्ल का नाम:</string>
-    <string name="confidence">आत्मविश्वास:</string>
     <string name="prediction_date">अनुमान की तारीख:</string>
     <string name="scan_again">फिर से स्कैन करें</string>
     <string name="done">हो गया</string>
+    <string name="address">पता:</string>
 
     <!-- Profile Screen -->
     <string name="no_of_scans">स्कैन की संख्या</string>
@@ -130,6 +168,10 @@
     <string name="current_password">वर्तमान पासवर्ड</string>
     <string name="new_password">नया पासवर्ड</string>
     <string name="cancel">रद्द करें</string>
+
+    <!-- Notification Screen -->
+    <string name="text_notifications">सूचनाएं</string>
+    <string name="text_no_notification">कोई नई सूचना नहीं</string>
 
     <!-- Misc -->
     <string name="identify_your_sugarcane_banner">|| अपनी गन्ने की पहचान करें ||</string>

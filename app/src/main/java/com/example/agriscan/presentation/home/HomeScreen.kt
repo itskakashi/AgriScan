@@ -32,7 +32,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Headset
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -68,13 +67,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -103,13 +98,15 @@ import java.util.Calendar
 @Composable
 fun HomeRoot(navController: NavController, vm: HomeViewModel = koinViewModel()) {
     val uiState by vm.uiState.collectAsState()
-    LaunchedEffect(Unit) {
+    LaunchedEffect(true) {
         vm.syncScans()
+        vm.refresh()
     }
     HomeScreen(
         state = uiState,
         onAction = vm::onAction,
-        navController = navController
+        navController = navController,
+        onNotificationClick = { navController.navigate(Screen.NotificationScreen) }
     )
 }
 
@@ -119,11 +116,12 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
     navController: NavController,
+    onNotificationClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("home") }
 
     Scaffold(
-        topBar = { TopBar { onAction(HomeAction.LanguageChangeTapped) } },
+        topBar = { TopBar(onLanguageChange = { onAction(HomeAction.LanguageChangeTapped) }, onNotificationClick = onNotificationClick) },
         containerColor = Color.White
     ) { padding ->
 
@@ -167,11 +165,12 @@ fun HomeScreen(
                 ) }
                 item { Spacer(Modifier.height(20.dp)) }
                 item {
-                    LastPredictionRow(
-                        date = state.lastScanDate,
-                        breed = state.lastPredictedBreed,
-                        onSupportClick = { onAction(HomeAction.SupportButtonTapped) }
-                    )
+                    state.lastPredictedBreed?.let {
+                        LastPredictionRow(
+                            date = state.lastScanDate,
+                            predictionDetails = it,
+                        )
+                    }
                 }
             }
 
@@ -190,9 +189,7 @@ fun HomeScreen(
                         selectedRoute = it
                     }
                 },
-                onScanClick = { onAction(HomeAction.ScanButtonTapped) 
-                              navController.navigate(Screen.ScanScreen)
-                },
+                onScanClick = { navController.navigate(Screen.ScanScreen) },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
@@ -210,7 +207,7 @@ fun HomeScreen(
 // ----------------- UI Pieces -----------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(onLanguageChange: () -> Unit) {
+fun TopBar(onLanguageChange: () -> Unit, onNotificationClick: () -> Unit) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
         title = {
@@ -229,8 +226,8 @@ fun TopBar(onLanguageChange: () -> Unit) {
                 modifier = Modifier.clickable { onLanguageChange() }
             )
             Spacer(Modifier.width(16.dp))
-            BadgedBox(badge = { Badge(containerColor = Color(0xFFE83B3B)) {} }) {
-                Icon(Icons.Default.Notifications, "Notifications", tint = OffBlack)
+            IconButton(onClick = onNotificationClick) {
+                    Icon(Icons.Default.Notifications, "Notifications", tint = OffBlack)
             }
             Spacer(Modifier.width(8.dp))
         }
@@ -398,22 +395,34 @@ private fun DashboardCard(item: DashboardItem) {
 }
 
 @Composable
-private fun LastPredictionRow(date: String, breed: String, onSupportClick: () -> Unit) {
-    val formattedText = formatBreedText(breed)
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
+private fun LastPredictionRow(
+    date: String,
+    predictionDetails: PredictionDetails,
+) {
+    Column(horizontalAlignment = Alignment.Start, modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                stringResource(id = R.string.last_predicted_breed),
+                fontSize = 12.sp,
+                color = Muted
+            )
+            Text(date, fontSize = 12.sp, color = Muted)
+        }
+        Spacer(Modifier.height(8.dp))
         Card(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             border = BorderStroke(1.6.dp, LightStroke),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(16.dp)
+            ) {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
@@ -430,69 +439,37 @@ private fun LastPredictionRow(date: String, breed: String, onSupportClick: () ->
                 }
                 Spacer(Modifier.width(12.dp))
                 Column {
-                    Text(stringResource(id = R.string.last_predicted_breed), fontSize = 12.sp, color = Muted)
-                    Text(date, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = BrandGreen)
-                    Text(text = formattedText, fontSize = 14.sp, lineHeight = 18.sp, color = OffBlack)
+                    Text(
+                        predictionDetails.breed,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = BrandGreen
+                    )
+                    if (predictionDetails.detected.isNotBlank()) {
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            stringResource(id = R.string.detected) + ": " + predictionDetails.detected,
+                            fontSize = 14.sp,
+                            color = OffBlack
+                        )
+                    }
+                    if (predictionDetails.confidence.isNotBlank()) {
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            stringResource(id = R.string.confidence) + ": " + predictionDetails.confidence,
+                            fontSize = 14.sp,
+                            color = OffBlack
+                        )
+                    }
                 }
             }
-        }
-
-        IconButton(
-            onClick = onSupportClick,
-            modifier = Modifier
-                .size(58.dp)
-                .clip(CircleShape)
-                .background(BrandGreen)
-        ) {
-            Icon(Icons.Default.Headset, stringResource(id = R.string.support), modifier = Modifier.size(40.dp), tint = Color.White)
         }
     }
 }
 
-private fun formatBreedText(rawText: String): AnnotatedString {
-    // Example rawText: "✅ Sugarcane Detected (confidence: 93.03%) 🧠 Predicted Breed: Colk-16466 📊 Confidence: 82.09%"
-    // We want to bold the titles like "Sugarcane Detected", "Predicted Breed:", "Confidence:"
-    
-    return buildAnnotatedString {
-        val parts = rawText.split(Regex("(?=✅)|(?=🧠)|(?=📊)"))
-        
-        for (part in parts) {
-            if (part.isBlank()) continue
-            
-            val trimmedPart = part.trim()
-            val colonIndex = trimmedPart.indexOf(':')
-            
-            if (colonIndex != -1 && (trimmedPart.startsWith("🧠") || trimmedPart.startsWith("📊"))) {
-                // For "🧠 Predicted Breed: Value" or "📊 Confidence: Value"
-                // Bold the label part
-                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append(trimmedPart.substring(0, colonIndex + 1))
-                }
-                append(trimmedPart.substring(colonIndex + 1))
-            } else if (trimmedPart.startsWith("✅") || trimmedPart.startsWith("❌")) {
-                 // For the main status line, make it all bold or just the start
-                 // "✅ Sugarcane Detected (confidence: 93.03%)"
-                 val openParenIndex = trimmedPart.indexOf('(')
-                 if (openParenIndex != -1) {
-                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(trimmedPart.substring(0, openParenIndex))
-                     }
-                     append(trimmedPart.substring(openParenIndex))
-                 } else {
-                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(trimmedPart)
-                     }
-                 }
-            } else {
-                append(trimmedPart)
-            }
-            append("\n")
-        }
-    }
-}
 
-/* ======================= CUSTOM FLOATING BOTTOM BAR ======================= */
-/* Pure custom Box (no BottomAppBar). Uses your exact sizes/colors.          */
+
+
 
 private val WhiteDiscDiameter = 48.dp
 private val BumpRing = 3.dp
@@ -529,7 +506,6 @@ fun CustomBottomBarFloating(
             .height(BottomBarHeight + FabDiameter / 2),
         contentAlignment = Alignment.BottomCenter
     ) {
-        // Green bar body
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -543,7 +519,6 @@ fun CustomBottomBarFloating(
                 modifier = Modifier.fillMaxSize(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // LEFT two items (explicit, no NavItem list)
                 Row(
                     modifier = Modifier
                         .weight(1f)
@@ -571,7 +546,6 @@ fun CustomBottomBarFloating(
 
                 Spacer(Modifier.width(centerGap))
 
-                // RIGHT two items
                 Row(
                     modifier = Modifier
                         .weight(1f)
@@ -597,8 +571,6 @@ fun CustomBottomBarFloating(
             }
         }
 
-
-//         Raised scan button (fixed, not clipped)
         IconButton(
             onClick = onScanClick,
             modifier = Modifier
@@ -663,7 +635,6 @@ private fun RowScope.NavCell(
     }
 }
 
-/** Rounded bar UNION circle for convex bump (same as your shape) */
 private class CenterBumpBarShape(
     private val bumpRadius: Dp,
     private val barCorner: Dp,
@@ -703,7 +674,8 @@ private fun HomePreview() {
         HomeScreen(
             state = HomeState(),
             onAction = {},
-            navController = rememberNavController()
+            navController = rememberNavController(),
+            onNotificationClick = {}
         )
     }
 }

@@ -71,7 +71,8 @@ fun LearnRoot(
     LearnScreen(
         state = state,
         onAction = viewModel::onAction,
-        navController = navController
+        navController = navController,
+        onNotificationClick = { navController.navigate(Screen.NotificationScreen) }
     )
 }
 
@@ -82,11 +83,12 @@ fun LearnScreen(
     state: LearnState,
     onAction: (LearnAction) -> Unit,
     navController: NavController,
+    onNotificationClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("learn") }
 
     Scaffold(
-        topBar = { TopBar { onAction(LearnAction.LanguageChangeTapped) } }, // Reusable Top Bar
+        topBar = { TopBar(onLanguageChange = { onAction(LearnAction.LanguageChangeTapped) }, onNotificationClick = onNotificationClick) }, // Reusable Top Bar
         containerColor = Color(0xFFF0F2EF)
     ) { padding ->
 
@@ -209,6 +211,7 @@ private fun BreedInfoCard(breed: SugarcaneBreed) {
                         contentDescription = null,
                         modifier = Modifier
                             .weight(1f)
+                            .height(110.dp)
                             .clip(RoundedCornerShape(12.dp)),
                         contentScale = ContentScale.Crop
                     )

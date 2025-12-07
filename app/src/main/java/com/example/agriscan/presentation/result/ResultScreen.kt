@@ -154,11 +154,10 @@ fun ResultScreen(
 
 @Composable
 fun ResultRow(label: String, value: String) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(vertical = 4.dp)
     ) {
         Text(text = label, fontWeight = FontWeight.Bold, color = BrandGreenDark)
         Text(text = value, color = BrandGreenDark)

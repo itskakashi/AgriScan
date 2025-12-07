@@ -173,27 +173,7 @@ fun LoginScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(48.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-            Divider(color = Color.White.copy(alpha = 0.5f), modifier = Modifier.weight(1f))
-            Text(stringResource(id = R.string.or), color = Color.White.copy(alpha = 0.8f), modifier = Modifier.padding(horizontal = 16.dp))
-            Divider(color = Color.White.copy(alpha = 0.5f), modifier = Modifier.weight(1f))
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(text = stringResource(id = R.string.sign_in_with_social_networks), color = Color.White, fontSize = 14.sp)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            SocialIcon(R.drawable.ic_facebook, "Facebook")
-            Spacer(modifier = Modifier.width(24.dp))
-            SocialIcon(R.drawable.ic_google, "Google")
-            Spacer(modifier = Modifier.width(24.dp))
-            SocialIcon(R.drawable.ic_twitter, "Twitter")
-        }
     }
 }
 
